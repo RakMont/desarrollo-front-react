@@ -1,10 +1,12 @@
 import './App.css';
 import Default from "./screens/Default";
+import Product from "./screens/Product";
 
 function App() {
   return (
     <div className="App">
-      <Default/>
+        <Product/>
+        <Default/>
     </div>
   );
 }
