@@ -6,7 +6,7 @@ import LoginForm from "../screens/forms/LoginForm";
 
 const basename = process.env.NODE_ENV === 'production' ? '/desarrollo-front-react' : '/';
 
-const routes = createHashRouter([
+const routes = createBrowserRouter([
         {
             path:'/',
             element:<App />,
