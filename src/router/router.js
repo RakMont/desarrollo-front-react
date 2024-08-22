@@ -4,7 +4,7 @@ import {createBrowserRouter} from "react-router-dom";
 import App from "../App"
 import LoginForm from "../screens/forms/LoginForm";
 
-const basename = process.env.NODE_ENV === 'production' ? '/mod7-pr' : '/';
+const basename = process.env.NODE_ENV === 'production' ? '/desarrollo-front-react' : '/';
 
 const routes = createBrowserRouter([
         {
