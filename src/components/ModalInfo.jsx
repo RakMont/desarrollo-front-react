@@ -4,6 +4,7 @@ const ModalInfo = ({visible, message, onClose}) => {
     if (!visible) {
       return  null;
     }
+    console.log ( "mess "+ message +"onclose" + onClose);
     return (
         <div className="modal-overlay">
            <motion.div

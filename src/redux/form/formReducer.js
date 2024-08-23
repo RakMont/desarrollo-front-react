@@ -1,4 +1,4 @@
-import {SET_FORM_DATA} from "./formTypes";
+import {SET_COMPARED_DEFAULT_PASSWORD, SET_FORM_DATA} from "./formTypes";
 
 const initialState = {
     formData:{
@@ -6,6 +6,7 @@ const initialState = {
         email:'',
         password:'',
     },
+    comparedDefaultPassword: 'mod7ReactUSIP'
 }
 
 const formReducer = (state = initialState, action) =>{
@@ -17,6 +18,11 @@ const formReducer = (state = initialState, action) =>{
                     ...state.formData,
                     ...action.payload
                 },
+            }
+        }
+        case SET_COMPARED_DEFAULT_PASSWORD:{
+            return {
+                comparedDefaultPassword: action.payload
             }
         }
         default:

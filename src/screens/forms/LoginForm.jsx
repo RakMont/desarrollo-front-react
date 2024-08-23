@@ -9,10 +9,18 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const [showModalInfo, setShowModalInfo] = useState(false);
     const [values, handleChange] = useForm({username:'', email:'', password:''})
+    const [modalMessage, setModalMessage] = useState('');
+    const comparedDefaultPassword = useSelector(state => state.form.comparedDefaultPassword)
     const handleSubmit = (event) =>{
         event.preventDefault();
         console.log(values)
-        dispatch(setFormData(values))
+        if(values.password === comparedDefaultPassword){
+            setModalMessage("Logueado exitosamente")
+            dispatch(setFormData(values))
+        } else{
+            setModalMessage("Password incorrecto")
+        }
+        setShowModalInfo(true);
     }
 
     const form = useSelector(state => state.form);
@@ -32,7 +40,7 @@ const LoginForm = () => {
             <div className="container">
                 <ModalInfo
                     visible={showModalInfo}
-                    message="Welcome"
+                    message={modalMessage}
                     onClose={hideModalInfo}
                 />
                 <form onSubmit={handleSubmit}>
@@ -72,7 +80,6 @@ const LoginForm = () => {
                     </div>
                     <div className="button-container">
                         <button type="submit">Submit</button>
-                        <button onClick={showButton}>Show Modal</button>
                     </div>
                 </form>
             </div>
