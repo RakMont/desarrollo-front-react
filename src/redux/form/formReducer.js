@@ -3,8 +3,9 @@ import {SET_FORM_DATA} from "./formTypes";
 const initialState = {
     formData:{
         username:'',
-        email:''
-    }
+        email:'',
+        password:'',
+    },
 }
 
 const formReducer = (state = initialState, action) =>{
