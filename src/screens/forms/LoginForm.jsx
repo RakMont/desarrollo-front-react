@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 const LoginForm = () => {
     const dispatch = useDispatch();
     const [showModalInfo, setShowModalInfo] = useState(false);
-    const [values, handleChange] = useForm({username:'', email:'', password:''})
+    const [values, handleChange, resetValue] = useForm({username:'', email:'', password:''})
     const [modalMessage, setModalMessage] = useState('');
     const [passwordVisibility, setPasswordVisibility] = useState(false)
     const [modalType, setModalType] = useState('information');
@@ -37,6 +37,7 @@ const LoginForm = () => {
         setShowModalInfo(false);
         if(data === 'confirmationSucceed'){
             dispatch(setEmptyForm());
+            resetValue();
         }
     }
 
@@ -63,9 +64,8 @@ const LoginForm = () => {
                     onClose={handleCloseModal}
                 />
                 <div className="form-div">
+                    <h2>Login Form</h2>
                     <h4>username: {form.formData.username}</h4>
-                    <h4>email: {form.formData.email}</h4>
-                    <h4>password: {form.formData.password}</h4>
 
                     <div>
                         <label htmlFor="username">Username</label>
