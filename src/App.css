@@ -57,13 +57,14 @@ li {
 nav .user-nav-label{
   color: #cccccc;
 }
-a {
+
+nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
-a:hover {
+nav ul li a:hover {
   color: #ffcc00;
 }
 
@@ -125,6 +126,7 @@ a:hover {
   color: #cccccc;
 }
 
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -158,4 +160,10 @@ a:hover {
   color: #7e4f1a;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.logout-link{
+  color:darkblue;
+  margin-left: 12px;
+
 }

@@ -1,4 +1,4 @@
-import {SET_COMPARED_DEFAULT_PASSWORD, SET_FORM_DATA} from "./formTypes";
+import {SET_COMPARED_DEFAULT_PASSWORD, SET_EMPTY_DATA, SET_FORM_DATA} from "./formTypes";
 
 const initialState = {
     formData:{
@@ -23,6 +23,12 @@ const formReducer = (state = initialState, action) =>{
         case SET_COMPARED_DEFAULT_PASSWORD:{
             return {
                 comparedDefaultPassword: action.payload
+            }
+        }
+        case SET_EMPTY_DATA :{
+            return {
+                ...state,
+                formData: {initialState}
             }
         }
         default:

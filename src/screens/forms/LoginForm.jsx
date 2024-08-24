@@ -1,9 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import useForm from "../../hooks/useForm";
-import {setFormData} from "../../redux/form/formActions";
+import {setEmptyForm, setFormData} from "../../redux/form/formActions";
 import {useState} from "react";
 import { motion } from "framer-motion"
-import ModalInfo from "../../components/ModalInfo";
+import Modal from "../../components/Modal";
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -11,10 +12,14 @@ const LoginForm = () => {
     const [values, handleChange] = useForm({username:'', email:'', password:''})
     const [modalMessage, setModalMessage] = useState('');
     const [passwordVisibility, setPasswordVisibility] = useState(false)
+    const [modalType, setModalType] = useState('information');
     const comparedDefaultPassword = useSelector(state => state.form.comparedDefaultPassword)
+    const form = useSelector(state => state.form);
+
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(values)
+        console.log( "values" + values, "compared"+comparedDefaultPassword)
+        setModalType('information');
         if(values.password === comparedDefaultPassword){
             setModalMessage("Logueado exitosamente")
             dispatch(setFormData(values))
@@ -25,13 +30,23 @@ const LoginForm = () => {
     }
 
     const handlePasswordVisibility = () => {
-        //console.log("passview", event);
         setPasswordVisibility(!passwordVisibility);
     }
-    const form = useSelector(state => state.form);
 
-    const hideModalInfo = () => {
+    const handleCloseModal = (data) => {
         setShowModalInfo(false);
+        if(data === 'confirmationSucceed'){
+            dispatch(setEmptyForm());
+        }
+    }
+
+    const handleLogout = () =>{
+        setModalType('confirmation');
+        setModalMessage({
+            modalQuestion : '¿Estás seguro de que quieres cerrar sesión?',
+            confirmationButton: 'Presionar Para salir!!!'
+        })
+        setShowModalInfo(true);
     }
 
     return (
@@ -41,10 +56,11 @@ const LoginForm = () => {
             transition={{ duration: 0.5 }}
         >
             <div className="container">
-                <ModalInfo
+                <Modal
                     visible={showModalInfo}
+                    modalType={modalType}
                     message={modalMessage}
-                    onClose={hideModalInfo}
+                    onClose={handleCloseModal}
                 />
                 <div className="form-div">
                     <h4>username: {form.formData.username}</h4>
@@ -84,6 +100,7 @@ const LoginForm = () => {
                     </div>
                     <div className="button-container">
                         <button onClick={handleSubmit} >Submit</button>
+                        <Link className="logout-link" onClick={handleLogout}>Logout</Link>
                     </div>
                 </div>
             </div>

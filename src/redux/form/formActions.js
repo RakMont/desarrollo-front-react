@@ -1,4 +1,4 @@
-import {SET_COMPARED_DEFAULT_PASSWORD, SET_FORM_DATA} from "./formTypes";
+import {SET_COMPARED_DEFAULT_PASSWORD, SET_EMPTY_DATA, SET_FORM_DATA} from "./formTypes";
 
 export const setFormData = (formData)=>{
     return{
@@ -11,5 +11,10 @@ export const setComparedDefaultPassword = (defaultPassword) =>{
     return {
         type: SET_COMPARED_DEFAULT_PASSWORD,
         payload: defaultPassword
+    }
+}
+export const setEmptyForm = () =>{
+    return {
+        type: SET_EMPTY_DATA,
     }
 }

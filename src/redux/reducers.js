@@ -6,6 +6,6 @@ import formReducer from "./form/formReducer";
 const rootReducer = combineReducers({
     default: defaultReducer,
     products: productReducer,
-    form: formReducer
+    form: formReducer,
 });
 export default  rootReducer;
