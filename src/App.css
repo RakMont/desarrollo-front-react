@@ -167,3 +167,51 @@ nav ul li a:hover {
   margin-left: 12px;
 
 }
+
+.landing-page-header{
+  background-color: #64ac5b;
+  color: #fcfdfc;
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+}
+
+.landing-page-container{
+  width: 80%;
+  margin: 24px auto;
+  text-align: left;
+}
+
+.l-p-container{
+  padding-bottom:60px;
+
+}
+.landing-page-subtitle{
+  text-align: left;
+}
+.landing-page-subtitle hr{
+  border: 1px solid #64ac5b;
+}
+
+.landing-page-topics{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.landing-page-topic{
+  padding: 12px;
+  max-width: 100px;
+}
+footer {
+  position: fixed;
+  width: 80%;
+  bottom: 0;
+  padding-bottom: 24px;
+  height: 40px;
+  text-align: center;
+}
+footer hr{
+  border: 1px solid #cccccc;
+}
