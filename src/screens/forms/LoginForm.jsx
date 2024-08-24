@@ -1,15 +1,16 @@
 import {useDispatch, useSelector} from "react-redux";
 import useForm from "../../hooks/useForm";
 import {setFormData} from "../../redux/form/formActions";
+import {useState} from "react";
 import { motion } from "framer-motion"
 import ModalInfo from "../../components/ModalInfo";
-import {useState} from "react";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
     const [showModalInfo, setShowModalInfo] = useState(false);
     const [values, handleChange] = useForm({username:'', email:'', password:''})
     const [modalMessage, setModalMessage] = useState('');
+    const [passwordVisibility, setPasswordVisibility] = useState(false)
     const comparedDefaultPassword = useSelector(state => state.form.comparedDefaultPassword)
     const handleSubmit = (event) =>{
         event.preventDefault();
@@ -23,14 +24,16 @@ const LoginForm = () => {
         setShowModalInfo(true);
     }
 
+    const handlePasswordVisibility = () => {
+        //console.log("passview", event);
+        setPasswordVisibility(!passwordVisibility);
+    }
     const form = useSelector(state => state.form);
 
     const hideModalInfo = () => {
         setShowModalInfo(false);
     }
-    const showButton = () =>{
-        setShowModalInfo(true);
-    }
+
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -43,7 +46,7 @@ const LoginForm = () => {
                     message={modalMessage}
                     onClose={hideModalInfo}
                 />
-                <form onSubmit={handleSubmit}>
+                <div className="form-div">
                     <h4>username: {form.formData.username}</h4>
                     <h4>email: {form.formData.email}</h4>
                     <h4>password: {form.formData.password}</h4>
@@ -71,17 +74,18 @@ const LoginForm = () => {
                     <div>
                         <label htmlFor="password">Password</label>
                         <input
-                            type="password"
+                            type={passwordVisibility ? 'text' : 'password'}
                             id="password"
                             name="password"
                             value={values.password}
                             onChange={handleChange}
                         />
+                        <button onClick={handlePasswordVisibility}>{passwordVisibility ? 'Hide' : 'Show'}</button>
                     </div>
                     <div className="button-container">
-                        <button type="submit">Submit</button>
+                        <button onClick={handleSubmit} >Submit</button>
                     </div>
-                </form>
+                </div>
             </div>
         </motion.div>
     );
