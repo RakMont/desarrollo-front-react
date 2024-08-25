@@ -8,8 +8,8 @@ import {Provider} from 'react-redux';
 import router from "./router/router";
 import {RouterProvider} from "react-router-dom";
 
-import { hydrate, render } from "react-dom";
-/*
+//import { hydrate, render } from "react-dom";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -18,7 +18,9 @@ root.render(
       </Provider>
   </React.StrictMode>
 );
-*/
+
+
+/*
 const rootElement = document.getElementById("root");
 if (rootElement.hasChildNodes()) {
     hydrate(
@@ -33,5 +35,5 @@ if (rootElement.hasChildNodes()) {
         </Provider>,
         rootElement
     );
-}
-//reportWebVitals();
+}*/
+reportWebVitals();
