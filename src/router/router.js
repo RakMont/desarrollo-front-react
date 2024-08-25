@@ -5,8 +5,7 @@ import App from "../App"
 import LoginForm from "../screens/forms/LoginForm";
 import LandingPage from "../screens/LandingPage/LandingPage";
 
-const basename = process.env.NODE_ENV === 'production' ? '/desarrollo-front-react' : '/';
-//const basename ='/desarrollo-front-react';
+//const basename = process.env.NODE_ENV === 'production' ? '/desarrollo-front-react' : '/';
 const routes = createHashRouter([
         {
             path:'/',

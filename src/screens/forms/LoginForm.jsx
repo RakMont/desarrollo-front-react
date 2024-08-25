@@ -13,6 +13,8 @@ const LoginForm = () => {
     const [modalMessage, setModalMessage] = useState('');
     const [passwordVisibility, setPasswordVisibility] = useState(false)
     const [modalType, setModalType] = useState('information');
+    const [modalClass, setModalClass] = useState('success');
+    const [logged, setLogged] = useState(false);
     const comparedDefaultPassword = useSelector(state => state.form.comparedDefaultPassword)
     const form = useSelector(state => state.form);
 
@@ -21,10 +23,13 @@ const LoginForm = () => {
         console.log( "values" + values, "compared"+comparedDefaultPassword)
         setModalType('information');
         if(values.password === comparedDefaultPassword){
-            setModalMessage("Logueado exitosamente")
+            setModalClass('success');
+            setModalMessage('Logueado exitosamente');
+            setLogged(true);
             dispatch(setFormData(values))
         } else{
-            setModalMessage("Password incorrecto")
+            setModalClass('error');
+            setModalMessage('Password incorrecto');
         }
         setShowModalInfo(true);
     }
@@ -38,11 +43,13 @@ const LoginForm = () => {
         if(data === 'confirmationSucceed'){
             dispatch(setEmptyForm());
             resetValue();
+            setLogged(false);
         }
     }
 
     const handleLogout = () =>{
         setModalType('confirmation');
+        setModalClass('question');
         setModalMessage({
             modalQuestion : '¿Estás seguro de que quieres cerrar sesión?',
             confirmationButton: 'Presionar Para salir!!!'
@@ -59,6 +66,7 @@ const LoginForm = () => {
             <div className="container">
                 <Modal
                     visible={showModalInfo}
+                    modalClass={modalClass}
                     modalType={modalType}
                     message={modalMessage}
                     onClose={handleCloseModal}
@@ -68,7 +76,7 @@ const LoginForm = () => {
                     <h4>username: {form.formData.username}</h4>
 
                     <div>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Username: </label>
                         <input
                             type="text"
                             id="username"
@@ -78,7 +86,7 @@ const LoginForm = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email: </label>
                         <input
                             type="email"
                             id="email"
@@ -88,7 +96,7 @@ const LoginForm = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Password: </label>
                         <input
                             type={passwordVisibility ? 'text' : 'password'}
                             id="password"
@@ -98,10 +106,15 @@ const LoginForm = () => {
                         />
                         <button onClick={handlePasswordVisibility}>{passwordVisibility ? 'Hide' : 'Show'}</button>
                     </div>
-                    <div className="button-container">
-                        <button onClick={handleSubmit} >Submit</button>
-                        <Link className="logout-link" onClick={handleLogout}>Logout</Link>
-                    </div>
+
+                        <div className="button-container">
+                            {logged ?
+                                <Link className="logout-link" onClick={handleLogout}>Logout</Link> :
+                                <button onClick={handleSubmit} >Submit</button>
+                            }
+                        </div>
+
+
                 </div>
             </div>
         </motion.div>

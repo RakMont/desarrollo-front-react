@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 
-const Modal = ({visible,modalType, message, onClose}) => {
+const Modal = ({visible, modalClass, modalType, message, onClose}) => {
     if (!visible) {
       return  null;
     }
@@ -10,7 +10,7 @@ const Modal = ({visible,modalType, message, onClose}) => {
     return (
         <div className="modal-overlay">
            <motion.div
-               className="notification-success"
+               className={"notification-"+ modalClass}
                initial={{ opacity: 0, scale: 0.5 }}
                animate={{ opacity: 1, scale: 1 }}
                transition={{ duration: 0.5 }}>
@@ -27,7 +27,7 @@ const Modal = ({visible,modalType, message, onClose}) => {
                    </div>
                 }
                <button className="close-btn-success"
-                       onClick={onClose}>X</button>
+                       onClick={onClose}>&#x2716;</button>
            </motion.div>
         </div>
     );
